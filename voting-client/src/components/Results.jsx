@@ -27,6 +27,12 @@ export const Results = React.createClass({
             return "0%";
         return (this.getVotes(entry) * VOTE_WIDTH_PERCENT) + '%';
     },
+    next: function() {
+        debugger;
+        if (this.props.tally) {
+            this.props.next();
+        }
+    },
     render: function() {
         return <div className="results">
             <div className="tally">
@@ -47,7 +53,7 @@ export const Results = React.createClass({
                     ? <button ref="restart" onClick={this.props.restart}>
                             Restart
                         </button>
-                    : <button ref="next" className="next" onClick={this.props.next}>
+                    : <button ref="next" className="next" onClick={this.next}>
                         Next
                     </button>
 }
