@@ -70,6 +70,7 @@ describe('application logic :', () => {
                 }))
             ).to.equal(
                 Map({
+                    reveal: 1,
                     winner: '1'
                 })
             );
@@ -114,6 +115,7 @@ describe('application logic :', () => {
                 }))
             ).to.equal(
                 Map({
+                    reveal: 1,
                     winner: '1'
                 })
             );
@@ -123,7 +125,7 @@ describe('application logic :', () => {
 
     describe('restart -', () => {
 
-        it('returns to initial entries and takes the first two entries under vote', () => {
+        it('returns to initial entries and takes all entries under vote', () => {
             expect(
                 restart(Map({
                     vote: Map({
@@ -135,6 +137,7 @@ describe('application logic :', () => {
                 }))
             ).to.equal(
                 Map({
+                    reveal: 0,
                     vote: Map({
                         round: 2,
                         voteList: List.of('0', '1', '2', '3', '5', '8', '13')

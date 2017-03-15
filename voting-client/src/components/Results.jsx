@@ -23,7 +23,7 @@ export const Results = React.createClass({
         return 0;
     },
     getVotesBlockWidth: function(entry) {
-        if (this.props.reveal == null || this.props.reveal == 0)
+        if (this.props.reveal == null || this.props.reveal == 0) 
             return "0%";
         return (this.getVotes(entry) * VOTE_WIDTH_PERCENT) + '%';
     },

@@ -14,7 +14,7 @@ export function setEntries(state, entries) {
 
 function getWinners(vote) {
     if (!vote) return [];
-    const [zero, one, two, three, five, eight, thirteen] = vote.get('voteList');
+    const [zero, one, two, three, five, eight, thirteen, twentyOne, thirtyFour] = vote.get('voteList');
 
     const zeroVotes = vote.getIn(['tally', zero], 0);
     const oneVotes = vote.getIn(['tally', one], 0);
@@ -23,42 +23,59 @@ function getWinners(vote) {
     const fiveVotes = vote.getIn(['tally', five], 0);
     const eightVotes = vote.getIn(['tally', eight], 0);
     const thirteenVotes = vote.getIn(['tally', thirteen], 0);
+    const twentyOneVotes = vote.getIn(['tally', twentyOne], 0);
+    //const thirtyFourVotes = vote.getIn(['tally', thirtyFour], 0);
 
     var voteList = [{
-        id: zero,
-        value: zeroVotes
-    }, {
-        id: one,
-        value: oneVotes
-    }, {
-        id: two,
-        value: twoVotes
-    }, {
-        id: three,
-        value: threeVotes
-    }, {
-        id: five,
-        value: fiveVotes
-    }, {
-        id: eight,
-        value: eightVotes
-    }, {
-        id: thirteen,
-        value: thirteenVotes
-    }];
+            id: zero,
+            value: zeroVotes
+        }, {
+            id: one,
+            value: oneVotes
+        }, {
+            id: two,
+            value: twoVotes
+        }, {
+            id: three,
+            value: threeVotes
+        }, {
+            id: five,
+            value: fiveVotes
+        }, {
+            id: eight,
+            value: eightVotes
+        }, {
+            id: thirteen,
+            value: thirteenVotes
+        }, {
+            id: twentyOne,
+            value: twentyOneVotes
+        } //, {
+        //     id: thirtyFour,
+        //     value: thirtyFourVotes
+        // }
+    ];
 
     var orderedMap = getOm(voteList);
-
+    console.log(orderedMap);
     var filteredVotes = orderedMap.filter(x => x.value > 0).sortBy(x => x.value);
-
+    console.log(filteredVotes);
     if (filteredVotes.size == 1) return [filteredVotes.first().id];
+    console.log("SIZE: " + filteredVotes.size);
+
     if (filteredVotes.size == 2) {
         if (filteredVotes.first().value > filteredVotes.last().value) return [filteredVotes.first().id];
         else if (filteredVotes.first().value < filteredVotes.last().value) return [filteredVotes.last().id];
         else return [filteredVotes.first().id, filteredVotes.last().id];
-
     }
-    return filteredVotes;
+
+    var returnArray = filteredVotes.map((item) => {
+        return item.id
+    });
+
+
+    console.log("RETURN ARRAY: " + returnArray);
+    return returnArray;
 }
 
 function getOm(arr) {
